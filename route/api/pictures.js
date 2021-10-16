@@ -1,12 +1,9 @@
-const { json } = require("body-parser");
 const express = require("express");
-const pictureSchema = require("../../models/pictureSchema");
 const PictureSchema = require("../../models/pictureSchema");
 
 const pictureRoute = express.Router();
 
 pictureRoute.get("/", (req, res) => {
-  // {searchType, searchString}
   switch (req.query.searchType) {
     case "characteristics":
       PictureSchema.find({
@@ -14,7 +11,6 @@ pictureRoute.get("/", (req, res) => {
       }).then((picture) => {
         res.json(picture);
       });
-      console.log("getting char");
       break;
     case "text":
       PictureSchema.find({
@@ -22,7 +18,6 @@ pictureRoute.get("/", (req, res) => {
       }).then((picture) => {
         res.json(picture);
       });
-      console.log("getting text");
       break;
     case "url":
       PictureSchema.find({
@@ -30,13 +25,11 @@ pictureRoute.get("/", (req, res) => {
       }).then((picture) => {
         res.json(picture);
       });
-      console.log("getting url");
       break;
     default:
       PictureSchema.find().then((picture) => {
         res.json(picture);
       });
-      console.log("getting all");
       break;
   }
 });
@@ -50,7 +43,6 @@ pictureRoute.post("/api/insertpicture", async (req, res) => {
         url: picture.url,
         characteristics: picture.characteristics,
         title: picture.title,
-        similarImg: picture.similarImg,
       });
     });
 
@@ -69,7 +61,6 @@ pictureRoute.post("/api/insertpicture", async (req, res) => {
           url: req.body.imgArray[0].url,
           characteristics: req.body.imgArray[0].characteristics,
           title: req.body.imgArray[0].title,
-          similarImg: req.body.imgArray[0].similarImg,
         },
       ],
     });

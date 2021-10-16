@@ -14,10 +14,6 @@ const PictureSchema = new Schema({
     type: String,
     required: true,
   },
-  similarImg: {
-    type: Object,
-    required: true,
-  },
 });
 
 module.exports = picturesList = mongoose.model("picturesList", PictureSchema);
